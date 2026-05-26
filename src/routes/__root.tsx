@@ -72,14 +72,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "GpxBr Corretora de Seguros — Proteção para o que mais importa" },
+      { name: "description", content: "Seguros de automóvel, saúde, vida e residencial com as melhores condições do mercado. Cotação rápida pelo WhatsApp." },
+      { name: "author", content: "GpxBr Corretora de Seguros" },
+      { name: "keywords", content: "seguro auto, plano de saúde, seguro de vida, seguro residencial, corretora de seguros, cotação seguro" },
+      { property: "og:title", content: "GpxBr Corretora de Seguros" },
+      { property: "og:description", content: "Seguros de automóvel, saúde, vida e residencial com as melhores condições do mercado." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       {
