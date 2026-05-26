@@ -70,64 +70,67 @@ function LandingPage() {
       </header>
 
       {/* Hero */}
-      <section id="top" className="relative overflow-hidden bg-gradient-hero text-white">
-        <div className="pointer-events-none absolute inset-0 opacity-30" style={{
-          backgroundImage: "radial-gradient(circle at 20% 30%, rgba(255,255,255,0.25), transparent 40%), radial-gradient(circle at 80% 70%, rgba(255,255,255,0.15), transparent 40%)",
-        }} />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-background/30" />
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-24">
+      <section id="top" className="relative overflow-hidden bg-background">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-32 -left-32 h-[460px] w-[460px] rounded-full bg-primary/15 blur-3xl" />
+          <div className="absolute -bottom-40 right-[-120px] h-[520px] w-[520px] rounded-full bg-navy/10 blur-3xl" />
+          <div className="absolute top-1/3 left-1/2 h-[280px] w-[280px] -translate-x-1/2 rounded-full bg-gold/10 blur-3xl" />
+        </div>
+        <div className="relative mx-auto max-w-5xl px-4 py-20 text-center sm:px-6 md:py-28">
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5 text-gold" /> Corretora oficial • Atendimento humano
+            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-4 py-1.5 text-xs font-medium text-navy shadow-soft backdrop-blur">
+              <Sparkles className="h-3.5 w-3.5 text-primary" /> Plataforma completa de seguros
             </span>
-            <h1 className="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl">
-              Proteção para o que <span className="text-gold">mais importa</span> para você
+            <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-extrabold leading-[1.05] tracking-tight text-navy sm:text-5xl md:text-6xl lg:text-7xl">
+              Proteja o que importa.{" "}
+              <span className="bg-gradient-to-r from-primary to-navy bg-clip-text text-transparent">
+                Sem complicação.
+              </span>
             </h1>
-            <p className="mt-5 max-w-xl text-base text-white/85 sm:text-lg">
-              Seguros de automóvel, saúde, vida e residencial com as melhores condições do mercado. Cotação rápida, sem burocracia.
+            <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground sm:text-lg">
+              Seguros de automóvel, saúde, vida e residencial com as melhores condições do mercado. Cotação rápida pelo WhatsApp.
             </p>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button
                 size="lg"
                 onClick={() => openQuote()}
-                className="h-12 bg-gold text-gold-foreground shadow-glow hover:bg-gold/90"
+                className="group h-12 rounded-full bg-primary px-6 text-primary-foreground shadow-soft hover:bg-primary/90"
               >
-                Fazer minha cotação agora
+                Fazer minha cotação
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
                 asChild
-                className="h-12 border-white/30 bg-white/5 text-white backdrop-blur hover:bg-white/15 hover:text-white"
+                className="h-12 rounded-full border-border bg-card px-6 text-navy hover:bg-accent"
               >
                 <a href={WHATSAPP_DIRECT} target="_blank" rel="noopener noreferrer">
-                  <MessageCircle className="mr-2 h-5 w-5" /> Falar com consultor
+                  <MessageCircle className="mr-2 h-5 w-5 text-whatsapp" /> Falar no WhatsApp
                 </a>
               </Button>
             </div>
-            <div className="mt-8 flex flex-wrap items-center gap-6 text-sm text-white/80">
-              <div className="flex items-center gap-2"><Shield className="h-4 w-4 text-gold" /> +15 seguradoras parceiras</div>
-              <div className="flex items-center gap-2"><Headphones className="h-4 w-4 text-gold" /> Suporte direto pelo WhatsApp</div>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2"><Shield className="h-4 w-4 text-primary" /> +15 seguradoras parceiras</div>
+              <div className="flex items-center gap-2"><Headphones className="h-4 w-4 text-primary" /> Suporte humano</div>
+              <div className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-primary" /> Cotação em minutos</div>
             </div>
           </Reveal>
-          <Reveal delay={150}>
-            <div className="relative mx-auto w-full max-w-md">
-              <div className="absolute -inset-4 rounded-3xl bg-gold/20 blur-2xl" />
-              <div className="relative rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-xl shadow-glow">
-                <img src={logo} alt="GpxBr" className="mx-auto h-40 w-40 animate-float rounded-full shadow-glow" />
-                <div className="mt-6 grid grid-cols-2 gap-3">
-                  {SERVICES.map(({ id, icon: Icon, title }) => (
-                    <button
-                      key={id}
-                      onClick={() => openQuote(id)}
-                      className="flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 p-3 text-left text-sm text-white transition-all hover:border-gold hover:bg-white/15"
-                    >
-                      <Icon className="h-4 w-4 text-gold" />
-                      <span className="font-medium">{title.replace("Seguro ", "").replace("Plano de ", "")}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
+
+          <Reveal delay={120}>
+            <div className="mx-auto mt-14 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+              {SERVICES.map(({ id, icon: Icon, title }) => (
+                <button
+                  key={id}
+                  onClick={() => openQuote(id)}
+                  className="group flex flex-col items-center gap-2 rounded-2xl border border-border bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-soft"
+                >
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <span className="text-sm font-semibold text-navy">{title.replace("Seguro ", "").replace("Plano de ", "")}</span>
+                </button>
+              ))}
             </div>
           </Reveal>
         </div>
