@@ -143,7 +143,7 @@ function LandingPage() {
             <p className="mt-3 text-muted-foreground">Escolha a categoria, responda algumas perguntas e receba sua cotação pelo WhatsApp.</p>
           </div>
         </Reveal>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map(({ id, icon: Icon, title, desc }, i) => (
             <Reveal key={id} delay={i * 90}>
               <div className="group flex h-full flex-col rounded-2xl border border-border bg-gradient-card p-6 shadow-card transition-all hover:-translate-y-1 hover:shadow-soft">
