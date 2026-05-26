@@ -265,7 +265,7 @@ function LandingPage() {
         </div>
       </footer>
 
-      <WhatsappFloat />
+      
       <QuoteModal open={modalOpen} onOpenChange={setModalOpen} initialCategory={category} />
     </div>
   );
