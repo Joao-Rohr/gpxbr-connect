@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, Car, Heart, HeartPulse, Home, MessageCircle, Phone, Shield, Sparkles, Headphones, ExternalLink, Menu, X } from "lucide-react";
+import { ArrowRight, Car, Heart, HeartPulse, Home, MessageCircle, Phone, Shield, Sparkles, Headphones, ExternalLink, Menu, X, Briefcase, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { QuoteModal, type InsuranceCategory } from "@/components/QuoteModal";
 import { WhatsappFloat } from "@/components/WhatsappFloat";
@@ -17,9 +17,11 @@ const COTACAO_URL = "https://gpxseguros.aggilizador.com.br";
 
 const SERVICES: { id: InsuranceCategory; icon: typeof Car; title: string; desc: string }[] = [
   { id: "auto", icon: Car, title: "Seguro Auto", desc: "Proteja seu veículo contra roubo, acidentes e muito mais." },
+  { id: "residencial", icon: Home, title: "Seguro Residencial", desc: "Sua casa segura em qualquer situação." },
   { id: "saude", icon: HeartPulse, title: "Plano de Saúde", desc: "Cobertura completa para você e sua família." },
   { id: "vida", icon: Heart, title: "Seguro de Vida", desc: "Garanta o futuro de quem você ama." },
-  { id: "residencial", icon: Home, title: "Seguro Residencial", desc: "Sua casa segura em qualquer situação." },
+  { id: "empresarial", icon: Briefcase, title: "Seguro Empresarial", desc: "Proteção completa para o seu negócio." },
+  { id: "celulares", icon: Smartphone, title: "Seguro de Celular", desc: "Cobertura contra roubo, furto e danos." },
 ];
 
 function LandingPage() {
@@ -114,7 +116,7 @@ function LandingPage() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="mx-auto mt-14 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+            <div className="mx-auto mt-14 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
               {SERVICES.map(({ id, icon: Icon, title }) => (
                 <button
                   key={id}
@@ -141,7 +143,7 @@ function LandingPage() {
             <p className="mt-3 text-muted-foreground">Escolha a categoria, responda algumas perguntas e receba sua cotação pelo WhatsApp.</p>
           </div>
         </Reveal>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map(({ id, icon: Icon, title, desc }, i) => (
             <Reveal key={id} delay={i * 90}>
               <div className="group flex h-full flex-col rounded-2xl border border-border bg-gradient-card p-6 shadow-card transition-all hover:-translate-y-1 hover:shadow-soft">
