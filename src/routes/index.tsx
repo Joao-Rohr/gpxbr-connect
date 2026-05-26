@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { QuoteModal, type InsuranceCategory } from "@/components/QuoteModal";
 import { WhatsappFloat } from "@/components/WhatsappFloat";
 import { Reveal } from "@/components/Reveal";
+import { AnimatedHeadline } from "@/components/AnimatedHeadline";
 import logo from "@/assets/gpxbr-logo.png";
 
 export const Route = createFileRoute("/")({
