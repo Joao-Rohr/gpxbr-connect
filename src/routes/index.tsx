@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, Car, Heart, HeartPulse, Home, MessageCircle, Phone, Shield, Sparkles, Headphones, ExternalLink, Menu, X } from "lucide-react";
+import { ArrowRight, Car, Heart, HeartPulse, Home, MessageCircle, Phone, Shield, Sparkles, Headphones, ExternalLink, Menu, X, Briefcase, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { QuoteModal, type InsuranceCategory } from "@/components/QuoteModal";
 import { WhatsappFloat } from "@/components/WhatsappFloat";
@@ -17,9 +17,11 @@ const COTACAO_URL = "https://gpxseguros.aggilizador.com.br";
 
 const SERVICES: { id: InsuranceCategory; icon: typeof Car; title: string; desc: string }[] = [
   { id: "auto", icon: Car, title: "Seguro Auto", desc: "Proteja seu veículo contra roubo, acidentes e muito mais." },
+  { id: "residencial", icon: Home, title: "Seguro Residencial", desc: "Sua casa segura em qualquer situação." },
   { id: "saude", icon: HeartPulse, title: "Plano de Saúde", desc: "Cobertura completa para você e sua família." },
   { id: "vida", icon: Heart, title: "Seguro de Vida", desc: "Garanta o futuro de quem você ama." },
-  { id: "residencial", icon: Home, title: "Seguro Residencial", desc: "Sua casa segura em qualquer situação." },
+  { id: "empresarial", icon: Briefcase, title: "Seguro Empresarial", desc: "Proteção completa para o seu negócio." },
+  { id: "celulares", icon: Smartphone, title: "Seguro de Celular", desc: "Cobertura contra roubo, furto e danos." },
 ];
 
 function LandingPage() {
