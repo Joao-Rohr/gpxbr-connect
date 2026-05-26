@@ -82,12 +82,7 @@ function LandingPage() {
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-4 py-1.5 text-xs font-medium text-navy shadow-soft backdrop-blur">
               <Sparkles className="h-3.5 w-3.5 text-primary" /> Plataforma completa de seguros
             </span>
-            <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-extrabold leading-[1.05] tracking-tight text-navy sm:text-5xl md:text-6xl lg:text-7xl">
-              Proteja o que importa.{" "}
-              <span className="bg-gradient-to-r from-primary to-navy bg-clip-text text-transparent">
-                Sem complicação.
-              </span>
-            </h1>
+            <AnimatedHeadline />
             <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground sm:text-lg">
               Seguros de automóvel, saúde, vida e residencial com as melhores condições do mercado. Cotação rápida pelo WhatsApp.
             </p>
