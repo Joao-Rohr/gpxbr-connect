@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ArrowRight, Car, Heart, HeartPulse, Home, MessageCircle, Phone, Shield, Sparkles, Headphones, ExternalLink, Menu, X, Briefcase, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { QuoteModal, type InsuranceCategory } from "@/components/QuoteModal";
-import { WhatsappFloat } from "@/components/WhatsappFloat";
+
 import { Reveal } from "@/components/Reveal";
 import { AnimatedHeadline } from "@/components/AnimatedHeadline";
 import logo from "@/assets/gpxbr-logo.png";
@@ -88,7 +88,7 @@ function LandingPage() {
             <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground sm:text-lg">
               Seguros de automóvel, saúde, vida e residencial com as melhores condições do mercado. Cotação rápida pelo WhatsApp.
             </p>
-            <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <div className="mt-9 flex justify-center">
               <Button
                 size="lg"
                 onClick={() => openQuote()}
@@ -96,16 +96,6 @@ function LandingPage() {
               >
                 Fazer minha cotação
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                asChild
-                className="h-12 rounded-full border-border bg-card px-6 text-navy hover:bg-accent"
-              >
-                <a href={WHATSAPP_DIRECT} target="_blank" rel="noopener noreferrer">
-                  <MessageCircle className="mr-2 h-5 w-5 text-whatsapp" /> Falar no WhatsApp
-                </a>
               </Button>
             </div>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-muted-foreground">
@@ -228,13 +218,11 @@ function LandingPage() {
             </h2>
             <p className="relative mt-4 text-white/85">Resposta rápida no WhatsApp. Sem compromisso.</p>
             <Button
-              asChild
               size="lg"
+              onClick={() => openQuote()}
               className="relative mt-8 h-14 rounded-full bg-whatsapp px-8 text-base text-whatsapp-foreground shadow-soft hover:bg-whatsapp/90"
             >
-              <a href={WHATSAPP_DIRECT} target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="mr-2 h-6 w-6" /> Falar no WhatsApp agora
-              </a>
+              <MessageCircle className="mr-2 h-6 w-6" /> Falar no WhatsApp agora
             </Button>
           </Reveal>
         </div>
@@ -277,7 +265,7 @@ function LandingPage() {
         </div>
       </footer>
 
-      <WhatsappFloat />
+      
       <QuoteModal open={modalOpen} onOpenChange={setModalOpen} initialCategory={category} />
     </div>
   );
