@@ -218,13 +218,11 @@ function LandingPage() {
             </h2>
             <p className="relative mt-4 text-white/85">Resposta rápida no WhatsApp. Sem compromisso.</p>
             <Button
-              asChild
               size="lg"
+              onClick={() => openQuote()}
               className="relative mt-8 h-14 rounded-full bg-whatsapp px-8 text-base text-whatsapp-foreground shadow-soft hover:bg-whatsapp/90"
             >
-              <a href={WHATSAPP_DIRECT} target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="mr-2 h-6 w-6" /> Falar no WhatsApp agora
-              </a>
+              <MessageCircle className="mr-2 h-6 w-6" /> Falar no WhatsApp agora
             </Button>
           </Reveal>
         </div>
