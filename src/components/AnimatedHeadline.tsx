@@ -2,8 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const PHRASES = [
+  "Proteja o que importa. Sem complicações.",
   "Não espere o pior acontecer. Evite transtornos.",
-  "Com proteção a vida fica mais leve.",
+  "Com proteção a vida fica mais leve. Faça sua cotação.",
 ];
 
 export function AnimatedHeadline() {
@@ -13,7 +14,7 @@ export function AnimatedHeadline() {
   useEffect(() => {
     const id = setTimeout(() => {
       setIndex((i) => (i + 1) % phrases.length);
-    }, 3500);
+    }, 5500);
     return () => clearTimeout(id);
   }, [index, phrases.length]);
 
