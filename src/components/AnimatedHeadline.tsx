@@ -18,16 +18,20 @@ export function AnimatedHeadline() {
   }, [index, phrases.length]);
 
   return (
-    <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-extrabold leading-[1.05] tracking-tight text-navy sm:text-5xl md:text-6xl lg:text-7xl">
-      <span className="relative flex w-full justify-center overflow-hidden text-center min-h-[1.2em] md:min-h-[1.15em]">
+    <h1 className="mx-auto mt-6 max-w-4xl text-3xl font-extrabold leading-[1.15] tracking-tight text-navy sm:text-4xl md:text-5xl lg:text-6xl">
+      <span className="relative block w-full text-center">
+        {/* invisible spacer keeps height for the tallest phrase */}
+        <span aria-hidden className="invisible block">
+          {phrases.reduce((a, b) => (a.length >= b.length ? a : b))}
+        </span>
         <AnimatePresence mode="wait">
           <motion.span
             key={index}
-            className="absolute bg-gradient-to-r from-primary to-navy bg-clip-text text-transparent"
-            initial={{ opacity: 0, y: "100%" }}
+            className="absolute inset-0 bg-gradient-to-r from-primary to-navy bg-clip-text text-transparent"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: "-100%" }}
-            transition={{ type: "spring", stiffness: 70, damping: 14 }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             {phrases[index]}
           </motion.span>
