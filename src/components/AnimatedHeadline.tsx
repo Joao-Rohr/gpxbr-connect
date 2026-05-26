@@ -14,7 +14,7 @@ export function AnimatedHeadline() {
   useEffect(() => {
     const id = setTimeout(() => {
       setIndex((i) => (i + 1) % phrases.length);
-    }, 3500);
+    }, 5500);
     return () => clearTimeout(id);
   }, [index, phrases.length]);
 
