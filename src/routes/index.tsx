@@ -116,7 +116,7 @@ function LandingPage() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="mx-auto mt-14 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+            <div className="mx-auto mt-14 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
               {SERVICES.map(({ id, icon: Icon, title }) => (
                 <button
                   key={id}
