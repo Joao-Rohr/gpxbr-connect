@@ -219,20 +219,20 @@ function LandingPage() {
       </section>
 
       {/* Final CTA */}
-      <section id="contato" className="relative overflow-hidden bg-gradient-hero py-20 text-white">
-        <div className="pointer-events-none absolute inset-0 opacity-30" style={{
-          backgroundImage: "radial-gradient(circle at 70% 30%, rgba(250,200,80,0.3), transparent 50%)",
-        }} />
-        <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6">
+      <section id="contato" className="px-4 py-20 sm:px-6">
+        <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-border bg-gradient-cta px-6 py-16 text-center text-white shadow-soft sm:px-12">
+          <div className="pointer-events-none absolute inset-0 opacity-40" style={{
+            backgroundImage: "radial-gradient(circle at 80% 20%, rgba(250,200,80,0.35), transparent 50%), radial-gradient(circle at 10% 90%, rgba(255,255,255,0.15), transparent 50%)",
+          }} />
           <Reveal>
-            <h2 className="text-3xl font-extrabold leading-tight sm:text-4xl md:text-5xl">
-              Fale agora com nosso consultor e <span className="text-gold">garanta sua proteção hoje</span>
+            <h2 className="relative text-3xl font-extrabold leading-tight sm:text-4xl md:text-5xl">
+              Pronto para garantir sua proteção?
             </h2>
-            <p className="mt-4 text-white/85">Resposta rápida no WhatsApp. Sem compromisso.</p>
+            <p className="relative mt-4 text-white/85">Resposta rápida no WhatsApp. Sem compromisso.</p>
             <Button
               asChild
               size="lg"
-              className="mt-8 h-14 bg-whatsapp px-8 text-base text-whatsapp-foreground shadow-glow hover:bg-whatsapp/90"
+              className="relative mt-8 h-14 rounded-full bg-whatsapp px-8 text-base text-whatsapp-foreground shadow-soft hover:bg-whatsapp/90"
             >
               <a href={WHATSAPP_DIRECT} target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="mr-2 h-6 w-6" /> Falar no WhatsApp agora
