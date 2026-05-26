@@ -2,8 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const PHRASES = [
+  "Proteja o que importa. Sem complicações.",
   "Não espere o pior acontecer. Evite transtornos.",
-  "Com proteção a vida fica mais leve.",
+  "Com proteção a vida fica mais leve. Faça sua cotação.",
 ];
 
 export function AnimatedHeadline() {
