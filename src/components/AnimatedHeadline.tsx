@@ -9,6 +9,7 @@ const PHRASES = [
 
 export function AnimatedHeadline() {
   const [index, setIndex] = useState(0);
+  const [atTop, setAtTop] = useState(true);
   const phrases = useMemo(() => PHRASES, []);
 
   useEffect(() => {
@@ -18,8 +19,22 @@ export function AnimatedHeadline() {
     return () => clearTimeout(id);
   }, [index, phrases.length]);
 
+  useEffect(() => {
+    const onScroll = () => setAtTop(window.scrollY < 120);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <h1 className="mx-auto mt-6 max-w-4xl text-3xl font-extrabold leading-[1.15] tracking-tight text-navy sm:text-4xl md:text-5xl lg:text-6xl">
+    <h1
+      className="mx-auto mt-6 max-w-4xl text-3xl font-extrabold leading-[1.15] tracking-tight text-navy transition-all duration-500 ease-out sm:text-4xl md:text-5xl lg:text-6xl"
+      style={{
+        opacity: atTop ? 1 : 0,
+        transform: atTop ? "translateY(0)" : "translateY(-12px)",
+        pointerEvents: atTop ? "auto" : "none",
+      }}
+    >
       <span className="relative block w-full text-center">
         {/* invisible spacer keeps height for the tallest phrase */}
         <span aria-hidden className="invisible block">

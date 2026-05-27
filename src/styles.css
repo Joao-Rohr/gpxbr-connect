@@ -200,3 +200,14 @@
 }
 .animate-float { animation: float 3s ease-in-out infinite; }
 
+@keyframes wiggle-cta {
+  0%, 60%, 100% { transform: rotate(0deg) scale(1); }
+  65% { transform: rotate(-3deg) scale(1.04); }
+  70% { transform: rotate(3deg) scale(1.04); }
+  75% { transform: rotate(-2deg) scale(1.03); }
+  80% { transform: rotate(2deg) scale(1.03); }
+  85% { transform: rotate(0deg) scale(1.02); }
+}
+.animate-wiggle-cta { animation: wiggle-cta 3.2s ease-in-out infinite; transform-origin: center; }
+.animate-wiggle-cta:hover { animation-play-state: paused; }
+
