@@ -1,8 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, Car, Heart, HeartPulse, Home, MessageCircle, Phone, Shield, Sparkles, Headphones, ExternalLink, Menu, X, Briefcase, Smartphone } from "lucide-react";
+import { ArrowRight, Car, Heart, HeartPulse, Home, MessageCircle, Phone, Shield, Sparkles, Headphones, ExternalLink, MoreVertical, Briefcase, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { QuoteModal, type InsuranceCategory } from "@/components/QuoteModal";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 import { Reveal } from "@/components/Reveal";
 import { AnimatedHeadline } from "@/components/AnimatedHeadline";
