@@ -151,7 +151,14 @@ export function QuoteModal({ open, onOpenChange, initialCategory = null }: Quote
       .map(([k, v]) => `• ${k}: ${v}`)
       .join("\n");
     const msg = `Olá, vim pelo site da GpxBr Corretora! 😊\nTenho interesse em: ${category ? CATEGORY_LABEL[category] : ""}\n\nMinhas informações:\n${lines}\n\nPode me ajudar com uma cotação?`;
-    window.open(`https://wa.me/5521964223571?text=${encodeURIComponent(msg)}`, "_blank");
+    const url = `https://wa.me/5521964223571?text=${encodeURIComponent(msg)}`;
+    const link = document.createElement("a");
+    link.href = url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
     onOpenChange(false);
   };
 
