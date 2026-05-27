@@ -142,7 +142,7 @@ function LandingPage() {
               <Button
                 size="lg"
                 onClick={() => openQuote()}
-                className="group h-12 rounded-full bg-primary px-6 text-primary-foreground shadow-soft hover:bg-primary/90"
+                className="group h-12 animate-wiggle-cta rounded-full bg-primary px-6 text-primary-foreground shadow-soft hover:bg-primary/90"
               >
                 Fazer minha cotação
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
