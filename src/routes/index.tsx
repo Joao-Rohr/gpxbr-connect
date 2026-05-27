@@ -1,8 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, Car, Heart, HeartPulse, Home, MessageCircle, Phone, Shield, Sparkles, Headphones, ExternalLink, Menu, X, Briefcase, Smartphone } from "lucide-react";
+import { ArrowRight, Car, Heart, HeartPulse, Home, MessageCircle, Phone, Shield, Sparkles, Headphones, ExternalLink, MoreVertical, Briefcase, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { QuoteModal, type InsuranceCategory } from "@/components/QuoteModal";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 import { Reveal } from "@/components/Reveal";
 import { AnimatedHeadline } from "@/components/AnimatedHeadline";
@@ -51,25 +57,69 @@ function LandingPage() {
             <a href="#como-funciona" className="text-sm font-medium text-foreground/80 transition-colors hover:text-primary">Como Funciona</a>
             <a href="#contato" className="text-sm font-medium text-foreground/80 transition-colors hover:text-primary">Contato</a>
           </nav>
-          <div className="hidden md:block">
+          <div className="hidden items-center gap-2 md:flex">
             <Button onClick={() => openQuote()} className="bg-gold text-gold-foreground hover:bg-gold/90">
               Fazer cotação
             </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  aria-label="Mais opções"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-md text-navy transition-colors hover:bg-accent"
+                >
+                  <MoreVertical className="h-5 w-5" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuItem asChild>
+                  <Link to="/seguradoras" target="_blank" rel="noopener noreferrer">
+                    <Shield className="mr-2 h-4 w-4 text-primary" /> Seguradoras Parceiras
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
-          <button className="md:hidden" onClick={() => setMenuOpen((v) => !v)} aria-label="Menu">
-            {menuOpen ? <X className="h-6 w-6 text-navy" /> : <Menu className="h-6 w-6 text-navy" />}
+          <button
+            className="relative h-9 w-9 md:hidden"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label="Menu"
+            aria-expanded={menuOpen}
+          >
+            <span className="sr-only">Abrir menu</span>
+            <span
+              className="absolute left-1/2 top-1/2 block h-0.5 w-6 -translate-x-1/2 rounded-full bg-navy transition-all duration-300 ease-out"
+              style={{ transform: menuOpen ? "translate(-50%, -50%) rotate(45deg)" : "translate(-50%, calc(-50% - 7px))" }}
+            />
+            <span
+              className="absolute left-1/2 top-1/2 block h-0.5 w-6 -translate-x-1/2 rounded-full bg-navy transition-all duration-200 ease-out"
+              style={{ opacity: menuOpen ? 0 : 1, transform: "translate(-50%, -50%)" }}
+            />
+            <span
+              className="absolute left-1/2 top-1/2 block h-0.5 w-6 -translate-x-1/2 rounded-full bg-navy transition-all duration-300 ease-out"
+              style={{ transform: menuOpen ? "translate(-50%, -50%) rotate(-45deg)" : "translate(-50%, calc(-50% + 7px))" }}
+            />
           </button>
         </div>
-        {menuOpen && (
-          <div className="border-t border-border/60 bg-background md:hidden">
-            <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3">
-              <a href="#servicos" onClick={() => setMenuOpen(false)} className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent">Serviços</a>
-              <a href="#como-funciona" onClick={() => setMenuOpen(false)} className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent">Como Funciona</a>
-              <a href="#contato" onClick={() => setMenuOpen(false)} className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent">Contato</a>
-              <Button onClick={() => { setMenuOpen(false); openQuote(); }} className="mt-2 bg-gold text-gold-foreground hover:bg-gold/90">Fazer cotação</Button>
-            </nav>
-          </div>
-        )}
+        <div
+          className="overflow-hidden border-border/60 bg-background transition-all duration-300 ease-out md:hidden"
+          style={{ maxHeight: menuOpen ? 320 : 0, borderTopWidth: menuOpen ? 1 : 0 }}
+        >
+          <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3">
+            <a href="#servicos" onClick={() => setMenuOpen(false)} className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent">Serviços</a>
+            <a href="#como-funciona" onClick={() => setMenuOpen(false)} className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent">Como Funciona</a>
+            <a href="#contato" onClick={() => setMenuOpen(false)} className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent">Contato</a>
+            <Link
+              to="/seguradoras"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMenuOpen(false)}
+              className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
+            >
+              Seguradoras Parceiras
+            </Link>
+            <Button onClick={() => { setMenuOpen(false); openQuote(); }} className="mt-2 bg-gold text-gold-foreground hover:bg-gold/90">Fazer cotação</Button>
+          </nav>
+        </div>
       </header>
 
       {/* Hero */}
@@ -92,7 +142,7 @@ function LandingPage() {
               <Button
                 size="lg"
                 onClick={() => openQuote()}
-                className="group h-12 rounded-full bg-primary px-6 text-primary-foreground shadow-soft hover:bg-primary/90"
+                className="group h-12 animate-wiggle-cta rounded-full bg-primary px-6 text-primary-foreground shadow-soft hover:bg-primary/90"
               >
                 Fazer minha cotação
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />

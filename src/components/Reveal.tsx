@@ -15,10 +15,7 @@ export function Reveal({ children, delay = 0, className = "" }: RevealProps) {
     if (!node) return;
     const obs = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          obs.disconnect();
-        }
+        setVisible(entry.isIntersecting);
       },
       { threshold: 0.12 }
     );
