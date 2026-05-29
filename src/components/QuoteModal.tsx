@@ -53,6 +53,7 @@ const FORMS: Record<InsuranceCategory, FieldDef[]> = {
     { type: "text", key: "Ano", label: "Ano", inputMode: "numeric" },
     { type: "text", key: "Placa", label: "Placa" },
     { type: "radio", key: "Possui GNV", label: "Possui GNV?", options: ["Sim", "Não"] },
+    { type: "radio", key: "Veículo Zero KM", label: "Veículo é Zero KM?", options: ["Sim", "Não"] },
     { type: "radio", key: "Veículo financiado", label: "Veículo é financiado?", options: ["Sim", "Não"] },
   ],
   residencial: [
