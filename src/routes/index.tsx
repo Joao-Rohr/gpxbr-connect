@@ -110,8 +110,6 @@ function LandingPage() {
             <a href="#contato" onClick={() => setMenuOpen(false)} className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent">Contato</a>
             <Link
               to="/seguradoras"
-              target="_blank"
-              rel="noopener noreferrer"
               onClick={() => setMenuOpen(false)}
               className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
             >
