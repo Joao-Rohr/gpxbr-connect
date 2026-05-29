@@ -291,13 +291,24 @@ function LandingPage() {
           </div>
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wider text-gold">Contato</h4>
-            <ul className="mt-4 space-y-2 text-sm">
-              <li>Consultor: <span className="font-medium text-white">Gleydston da Silva Rohr</span></li>
-              <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-gold" />
-                <a href={WHATSAPP_DIRECT} target="_blank" rel="noopener noreferrer" className="hover:text-gold">
-                  (21) 96422-3571
-                </a>
+            <ul className="mt-4 space-y-3 text-sm">
+              <li>
+                <div>Consultor: <span className="font-medium text-white">Gleydston da Silva Rohr</span></div>
+                <div className="mt-1 flex items-center gap-2">
+                  <Phone className="h-4 w-4 text-gold" />
+                  <a href="https://wa.me/5521964223571" target="_blank" rel="noopener noreferrer" className="hover:text-gold">
+                    (21) 96422-3571
+                  </a>
+                </div>
+              </li>
+              <li>
+                <div>Consultor: <span className="font-medium text-white">Paulo Roberto</span></div>
+                <div className="mt-1 flex items-center gap-2">
+                  <Phone className="h-4 w-4 text-gold" />
+                  <a href="https://wa.me/5521988466274" target="_blank" rel="noopener noreferrer" className="hover:text-gold">
+                    (21) 98846-6274
+                  </a>
+                </div>
               </li>
             </ul>
           </div>
