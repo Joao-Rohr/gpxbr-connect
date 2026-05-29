@@ -18,7 +18,6 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-const WHATSAPP_DIRECT = "https://wa.me/5521964223571?text=" + encodeURIComponent("Olá, vim pelo site da GpxBr Corretora! Gostaria de falar com um consultor.");
 const COTACAO_URL = "https://gpxseguros.aggilizador.com.br";
 
 const SERVICES: { id: InsuranceCategory; icon: typeof Car; title: string; desc: string }[] = [
