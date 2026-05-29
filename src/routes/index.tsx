@@ -18,7 +18,6 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-const WHATSAPP_DIRECT = "https://wa.me/5521964223571?text=" + encodeURIComponent("Olá, vim pelo site da GpxBr Corretora! Gostaria de falar com um consultor.");
 const COTACAO_URL = "https://gpxseguros.aggilizador.com.br";
 
 const SERVICES: { id: InsuranceCategory; icon: typeof Car; title: string; desc: string }[] = [
@@ -72,7 +71,7 @@ function LandingPage() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuItem asChild>
-                  <Link to="/seguradoras" target="_blank" rel="noopener noreferrer">
+                  <Link to="/seguradoras">
                     <Shield className="mr-2 h-4 w-4 text-primary" /> Seguradoras Parceiras
                   </Link>
                 </DropdownMenuItem>
@@ -110,8 +109,6 @@ function LandingPage() {
             <a href="#contato" onClick={() => setMenuOpen(false)} className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent">Contato</a>
             <Link
               to="/seguradoras"
-              target="_blank"
-              rel="noopener noreferrer"
               onClick={() => setMenuOpen(false)}
               className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
             >
@@ -166,7 +163,7 @@ function LandingPage() {
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                     <Icon className="h-5 w-5" />
                   </span>
-                  <span className="text-sm font-semibold text-navy">{title.replace("Seguro ", "").replace("Plano de ", "")}</span>
+                  <span className="text-sm font-semibold text-navy">{title.replace("Seguro de ", "").replace("Seguro ", "").replace("Plano de ", "")}</span>
                 </button>
               ))}
             </div>
@@ -293,13 +290,24 @@ function LandingPage() {
           </div>
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wider text-gold">Contato</h4>
-            <ul className="mt-4 space-y-2 text-sm">
-              <li>Consultor: <span className="font-medium text-white">Gleydston da Silva Rohr</span></li>
-              <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-gold" />
-                <a href={WHATSAPP_DIRECT} target="_blank" rel="noopener noreferrer" className="hover:text-gold">
-                  (21) 96422-3571
-                </a>
+            <ul className="mt-4 space-y-3 text-sm">
+              <li>
+                <div>Consultor: <span className="font-medium text-white">Gleydston da Silva Rohr</span></div>
+                <div className="mt-1 flex items-center gap-2">
+                  <Phone className="h-4 w-4 text-gold" />
+                  <a href="https://wa.me/5521964223571" target="_blank" rel="noopener noreferrer" className="hover:text-gold">
+                    (21) 96422-3571
+                  </a>
+                </div>
+              </li>
+              <li>
+                <div>Consultor: <span className="font-medium text-white">Paulo Roberto</span></div>
+                <div className="mt-1 flex items-center gap-2">
+                  <Phone className="h-4 w-4 text-gold" />
+                  <a href="https://wa.me/5521988466274" target="_blank" rel="noopener noreferrer" className="hover:text-gold">
+                    (21) 98846-6274
+                  </a>
+                </div>
               </li>
             </ul>
           </div>

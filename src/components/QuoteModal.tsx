@@ -53,6 +53,7 @@ const FORMS: Record<InsuranceCategory, FieldDef[]> = {
     { type: "text", key: "Ano", label: "Ano", inputMode: "numeric" },
     { type: "text", key: "Placa", label: "Placa" },
     { type: "radio", key: "Possui GNV", label: "Possui GNV?", options: ["Sim", "Não"] },
+    { type: "radio", key: "Veículo Zero KM", label: "Veículo é Zero KM?", options: ["Sim", "Não"] },
     { type: "radio", key: "Veículo financiado", label: "Veículo é financiado?", options: ["Sim", "Não"] },
   ],
   residencial: [
@@ -102,6 +103,7 @@ export function QuoteModal({ open, onOpenChange, initialCategory = null }: Quote
   const [category, setCategory] = useState<InsuranceCategory | null>(initialCategory);
   const [data, setData] = useState<Record<string, string>>({});
   const [errors, setErrors] = useState<Record<string, boolean>>({});
+  const [corretor, setCorretor] = useState<string>("");
 
   useEffect(() => {
     if (open) {
@@ -109,6 +111,7 @@ export function QuoteModal({ open, onOpenChange, initialCategory = null }: Quote
       setStep(initialCategory ? 2 : 1);
       setData({});
       setErrors({});
+      setCorretor("");
     }
   }, [open, initialCategory]);
 
@@ -151,7 +154,8 @@ export function QuoteModal({ open, onOpenChange, initialCategory = null }: Quote
       .map(([k, v]) => `• ${k}: ${v}`)
       .join("\n");
     const msg = `Olá, vim pelo site da GpxBr Corretora! 😊\nTenho interesse em: ${category ? CATEGORY_LABEL[category] : ""}\n\nMinhas informações:\n${lines}\n\nPode me ajudar com uma cotação?`;
-    const url = `https://wa.me/5521964223571?text=${encodeURIComponent(msg)}`;
+    const phone = corretor === "Paulo Roberto" ? "5521988466274" : "5521964223571";
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
     const link = document.createElement("a");
     link.href = url;
     link.target = "_blank";
@@ -309,11 +313,39 @@ export function QuoteModal({ open, onOpenChange, initialCategory = null }: Quote
                   ))}
               </ul>
             </div>
+
+            <div className="rounded-xl border border-border bg-card p-4">
+              <Label className="text-sm font-semibold text-navy">
+                Para qual corretor deseja enviar? <span className="text-destructive">*</span>
+              </Label>
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                {[
+                  { name: "Gleydston da Silva Rohr", phone: "(21) 96422-3571" },
+                  { name: "Paulo Roberto", phone: "(21) 98846-6274" },
+                ].map((c) => (
+                  <button
+                    key={c.name}
+                    type="button"
+                    onClick={() => setCorretor(c.name)}
+                    className={cn(
+                      "rounded-xl border-2 p-3 text-left transition-all hover:border-primary",
+                      corretor === c.name ? "border-primary bg-accent" : "border-border bg-card",
+                    )}
+                  >
+                    <div className="text-sm font-semibold text-navy">{c.name}</div>
+                    <div className="text-xs text-muted-foreground">{c.phone}</div>
+                  </button>
+                ))}
+              </div>
+              {!corretor && (
+                <p className="mt-2 text-xs text-muted-foreground">Selecione um corretor para enviar a cotação.</p>
+              )}
+            </div>
             <div className="flex justify-between">
               <Button variant="outline" onClick={() => setStep(2)}>
                 <ArrowLeft className="mr-1 h-4 w-4" /> Voltar
               </Button>
-              <Button onClick={sendWhatsapp} className="bg-whatsapp text-whatsapp-foreground hover:bg-whatsapp/90">
+              <Button onClick={sendWhatsapp} disabled={!corretor} className="bg-whatsapp text-whatsapp-foreground hover:bg-whatsapp/90 disabled:opacity-50">
                 <Send className="mr-2 h-4 w-4" /> Enviar para o WhatsApp
               </Button>
             </div>
