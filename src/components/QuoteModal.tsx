@@ -313,6 +313,34 @@ export function QuoteModal({ open, onOpenChange, initialCategory = null }: Quote
                   ))}
               </ul>
             </div>
+
+            <div className="rounded-xl border border-border bg-card p-4">
+              <Label className="text-sm font-semibold text-navy">
+                Para qual corretor deseja enviar? <span className="text-destructive">*</span>
+              </Label>
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                {[
+                  { name: "Gleydston da Silva Rohr", phone: "(21) 96422-3571" },
+                  { name: "Paulo Roberto", phone: "(21) 98846-6274" },
+                ].map((c) => (
+                  <button
+                    key={c.name}
+                    type="button"
+                    onClick={() => setCorretor(c.name)}
+                    className={cn(
+                      "rounded-xl border-2 p-3 text-left transition-all hover:border-primary",
+                      corretor === c.name ? "border-primary bg-accent" : "border-border bg-card",
+                    )}
+                  >
+                    <div className="text-sm font-semibold text-navy">{c.name}</div>
+                    <div className="text-xs text-muted-foreground">{c.phone}</div>
+                  </button>
+                ))}
+              </div>
+              {!corretor && (
+                <p className="mt-2 text-xs text-muted-foreground">Selecione um corretor para enviar a cotação.</p>
+              )}
+            </div>
             <div className="flex justify-between">
               <Button variant="outline" onClick={() => setStep(2)}>
                 <ArrowLeft className="mr-1 h-4 w-4" /> Voltar
