@@ -345,7 +345,7 @@ export function QuoteModal({ open, onOpenChange, initialCategory = null }: Quote
               <Button variant="outline" onClick={() => setStep(2)}>
                 <ArrowLeft className="mr-1 h-4 w-4" /> Voltar
               </Button>
-              <Button onClick={sendWhatsapp} className="bg-whatsapp text-whatsapp-foreground hover:bg-whatsapp/90">
+              <Button onClick={sendWhatsapp} disabled={!corretor} className="bg-whatsapp text-whatsapp-foreground hover:bg-whatsapp/90 disabled:opacity-50">
                 <Send className="mr-2 h-4 w-4" /> Enviar para o WhatsApp
               </Button>
             </div>
