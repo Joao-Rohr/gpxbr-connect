@@ -166,7 +166,7 @@ function LandingPage() {
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                     <Icon className="h-5 w-5" />
                   </span>
-                  <span className="text-sm font-semibold text-navy">{title.replace("Seguro ", "").replace("Plano de ", "")}</span>
+                  <span className="text-sm font-semibold text-navy">{title.replace("Seguro de ", "").replace("Seguro ", "").replace("Plano de ", "")}</span>
                 </button>
               ))}
             </div>
