@@ -35,60 +35,126 @@ const CATEGORY_LABEL: Record<InsuranceCategory, string> = {
   celulares: "Seguro de Celular",
 };
 
+type FormatKind = "upper" | "cpf" | "cnpj" | "cep" | "money" | "date";
+
 type FieldDef =
-  | { type: "text"; key: string; label: string; placeholder?: string; inputMode?: "text" | "numeric" | "decimal" }
+  | {
+      type: "text";
+      key: string;
+      label: string;
+      placeholder?: string;
+      inputMode?: "text" | "numeric" | "decimal";
+      format?: FormatKind;
+    }
   | { type: "radio"; key: string; label: string; options: string[] }
-  | { type: "ages" };
+  | { type: "ages"; format?: FormatKind };
+
+// ---- Formatters ----
+const onlyDigits = (s: string) => s.replace(/\D/g, "");
+
+function formatCPF(v: string) {
+  const d = onlyDigits(v).slice(0, 11);
+  let out = d;
+  if (d.length > 9) out = `${d.slice(0, 3)}.${d.slice(3, 6)}.${d.slice(6, 9)}-${d.slice(9)}`;
+  else if (d.length > 6) out = `${d.slice(0, 3)}.${d.slice(3, 6)}.${d.slice(6)}`;
+  else if (d.length > 3) out = `${d.slice(0, 3)}.${d.slice(3)}`;
+  return out;
+}
+
+function formatCNPJ(v: string) {
+  const d = onlyDigits(v).slice(0, 14);
+  let out = d;
+  if (d.length > 12) out = `${d.slice(0, 2)}.${d.slice(2, 5)}.${d.slice(5, 8)}/${d.slice(8, 12)}-${d.slice(12)}`;
+  else if (d.length > 8) out = `${d.slice(0, 2)}.${d.slice(2, 5)}.${d.slice(5, 8)}/${d.slice(8)}`;
+  else if (d.length > 5) out = `${d.slice(0, 2)}.${d.slice(2, 5)}.${d.slice(5)}`;
+  else if (d.length > 2) out = `${d.slice(0, 2)}.${d.slice(2)}`;
+  return out;
+}
+
+function formatCEP(v: string) {
+  const d = onlyDigits(v).slice(0, 8);
+  if (d.length > 5) return `${d.slice(0, 5)}-${d.slice(5)}`;
+  return d;
+}
+
+function formatMoney(v: string) {
+  const d = onlyDigits(v);
+  if (!d) return "";
+  const n = parseInt(d, 10);
+  const reais = Math.floor(n / 100);
+  const cents = (n % 100).toString().padStart(2, "0");
+  const reaisFmt = reais.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return `R$ ${reaisFmt},${cents}`;
+}
+
+function formatDate(v: string) {
+  const d = onlyDigits(v).slice(0, 8);
+  if (d.length > 4) return `${d.slice(0, 2)}/${d.slice(2, 4)}/${d.slice(4)}`;
+  if (d.length > 2) return `${d.slice(0, 2)}/${d.slice(2)}`;
+  return d;
+}
+
+function applyFormat(value: string, fmt?: FormatKind): string {
+  switch (fmt) {
+    case "upper": return value.toUpperCase();
+    case "cpf": return formatCPF(value);
+    case "cnpj": return formatCNPJ(value);
+    case "cep": return formatCEP(value);
+    case "money": return formatMoney(value);
+    case "date": return formatDate(value);
+    default: return value;
+  }
+}
 
 const FORMS: Record<InsuranceCategory, FieldDef[]> = {
   auto: [
-    { type: "text", key: "Nome completo", label: "Nome completo" },
+    { type: "text", key: "Nome completo", label: "Nome completo", format: "upper" },
     { type: "radio", key: "Estado civil", label: "Estado civil", options: ["Solteiro(a)", "Casado(a)", "Divorciado(a)", "Viúvo(a)", "União estável"] },
-    { type: "text", key: "CPF", label: "CPF", inputMode: "numeric" },
-    { type: "text", key: "CEP", label: "CEP", inputMode: "numeric" },
+    { type: "text", key: "CPF", label: "CPF", inputMode: "numeric", format: "cpf", placeholder: "000.000.000-00" },
+    { type: "text", key: "CEP", label: "CEP", inputMode: "numeric", format: "cep", placeholder: "00000-000" },
     { type: "radio", key: "Utilização", label: "Utilização do veículo", options: ["Passeio", "Ida ao trabalho", "Comercial", "Aplicativos"] },
     { type: "radio", key: "Condutores 18 a 25 anos", label: "Possui condutores de 18 a 25 anos?", options: ["Sim", "Não"] },
     { type: "radio", key: "Moradia", label: "Moradia", options: ["Casa", "Apartamento", "Condomínio"] },
-    { type: "text", key: "Modelo do carro", label: "Modelo do carro" },
-    { type: "text", key: "Ano", label: "Ano", inputMode: "numeric" },
-    { type: "text", key: "Placa", label: "Placa" },
+    { type: "text", key: "Modelo do carro", label: "Modelo do carro", format: "upper" },
+    { type: "text", key: "Ano de fabricação/Ano de modelo", label: "Ano de fabricação/Ano de modelo", placeholder: "Ex: 2023/2024" },
+    { type: "text", key: "Placa", label: "Placa", format: "upper" },
     { type: "radio", key: "Possui GNV", label: "Possui GNV?", options: ["Sim", "Não"] },
     { type: "radio", key: "Veículo Zero KM", label: "Veículo é Zero KM?", options: ["Sim", "Não"] },
     { type: "radio", key: "Veículo financiado", label: "Veículo é financiado?", options: ["Sim", "Não"] },
   ],
   residencial: [
-    { type: "text", key: "Nome completo", label: "Nome completo" },
-    { type: "text", key: "CPF", label: "CPF", inputMode: "numeric" },
-    { type: "text", key: "Endereço", label: "Endereço" },
-    { type: "text", key: "CEP", label: "CEP", inputMode: "numeric" },
-    { type: "text", key: "Valor do imóvel", label: "Valor do imóvel", inputMode: "decimal", placeholder: "R$" },
+    { type: "text", key: "Nome completo", label: "Nome completo", format: "upper" },
+    { type: "text", key: "CPF", label: "CPF", inputMode: "numeric", format: "cpf", placeholder: "000.000.000-00" },
+    { type: "text", key: "Endereço", label: "Endereço", format: "upper" },
+    { type: "text", key: "CEP", label: "CEP", inputMode: "numeric", format: "cep", placeholder: "00000-000" },
+    { type: "text", key: "Valor do imóvel", label: "Valor do imóvel", inputMode: "decimal", format: "money", placeholder: "R$ 0,00" },
   ],
   saude: [
     { type: "radio", key: "Tipo de pessoa", label: "Pessoa", options: ["Física", "Jurídica"] },
-    { type: "text", key: "Profissão", label: "Profissão" },
+    { type: "text", key: "Profissão", label: "Profissão", format: "upper" },
     { type: "text", key: "Quantidade de pessoas", label: "Quantidade de pessoas", inputMode: "numeric", placeholder: "Ex: 3" },
     { type: "ages" },
     { type: "radio", key: "Acomodação", label: "Preferência de acomodação", options: ["Quarto", "Enfermaria"] },
   ],
   vida: [
-    { type: "text", key: "Nome", label: "Nome" },
-    { type: "text", key: "CPF", label: "CPF", inputMode: "numeric" },
+    { type: "text", key: "Nome", label: "Nome", format: "upper" },
+    { type: "text", key: "CPF", label: "CPF", inputMode: "numeric", format: "cpf", placeholder: "000.000.000-00" },
     { type: "radio", key: "Estado civil", label: "Estado civil", options: ["Solteiro(a)", "Casado(a)", "Divorciado(a)", "Viúvo(a)", "União estável"] },
-    { type: "text", key: "Nascimento", label: "Data de nascimento", placeholder: "DD/MM/AAAA" },
-    { type: "text", key: "Endereço", label: "Endereço" },
-    { type: "text", key: "Profissão", label: "Profissão" },
-    { type: "text", key: "Valor da cobertura", label: "Valor da cobertura desejada", inputMode: "decimal", placeholder: "R$" },
+    { type: "text", key: "Nascimento", label: "Data de nascimento", inputMode: "numeric", format: "date", placeholder: "DD/MM/AAAA" },
+    { type: "text", key: "Endereço", label: "Endereço", format: "upper" },
+    { type: "text", key: "Profissão", label: "Profissão", format: "upper" },
+    { type: "text", key: "Valor da cobertura", label: "Valor da cobertura desejada", inputMode: "decimal", format: "money", placeholder: "R$ 0,00" },
   ],
   empresarial: [
-    { type: "text", key: "CNPJ", label: "CNPJ", inputMode: "numeric" },
-    { type: "text", key: "Valor da cobertura", label: "Valor da cobertura desejada", inputMode: "decimal", placeholder: "R$" },
+    { type: "text", key: "CNPJ", label: "CNPJ", inputMode: "numeric", format: "cnpj", placeholder: "00.000.000/0000-00" },
+    { type: "text", key: "Valor da cobertura", label: "Valor da cobertura desejada", inputMode: "decimal", format: "money", placeholder: "R$ 0,00" },
   ],
   celulares: [
-    { type: "text", key: "Nome", label: "Nome" },
-    { type: "text", key: "CPF", label: "CPF", inputMode: "numeric" },
-    { type: "text", key: "Endereço", label: "Endereço" },
-    { type: "text", key: "Modelo do celular", label: "Modelo do celular" },
-    { type: "text", key: "Valor do celular (nota fiscal)", label: "Valor do celular na nota fiscal", inputMode: "decimal", placeholder: "R$" },
+    { type: "text", key: "Nome", label: "Nome", format: "upper" },
+    { type: "text", key: "CPF", label: "CPF", inputMode: "numeric", format: "cpf", placeholder: "000.000.000-00" },
+    { type: "text", key: "Endereço", label: "Endereço", format: "upper" },
+    { type: "text", key: "Modelo do celular", label: "Modelo do celular", format: "upper" },
+    { type: "text", key: "Valor do celular (nota fiscal)", label: "Valor do celular na nota fiscal", inputMode: "decimal", format: "money", placeholder: "R$ 0,00" },
   ],
 };
 
@@ -221,6 +287,11 @@ export function QuoteModal({ open, onOpenChange, initialCategory = null }: Quote
           <div className="space-y-3">
             {fields.map((f, i) => {
               if (f.type === "text") {
+                const isUpper = category === "saude" && (f.key === "Profissão");
+                // Saúde requires "tudo em maiúsculo" — apply upper to all text fields too.
+                const effectiveFormat: FormatKind | undefined =
+                  category === "saude" && !f.format ? "upper" : f.format;
+                void isUpper;
                 return (
                   <Field
                     key={f.key}
@@ -229,7 +300,7 @@ export function QuoteModal({ open, onOpenChange, initialCategory = null }: Quote
                     placeholder={f.placeholder}
                     inputMode={f.inputMode}
                     error={errors[f.key]}
-                    onChange={(v) => set(f.key, v)}
+                    onChange={(v) => set(f.key, applyFormat(v, effectiveFormat))}
                   />
                 );
               }
@@ -265,7 +336,7 @@ export function QuoteModal({ open, onOpenChange, initialCategory = null }: Quote
                           <Input
                             inputMode="numeric"
                             value={data[k] || ""}
-                            onChange={(e) => set(k, e.target.value)}
+                            onChange={(e) => set(k, e.target.value.replace(/\D/g, ""))}
                             className={cn(errors[k] && "border-destructive focus-visible:ring-destructive")}
                             maxLength={3}
                           />
