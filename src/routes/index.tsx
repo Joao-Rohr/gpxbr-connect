@@ -72,7 +72,7 @@ function LandingPage() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuItem asChild>
-                  <Link to="/seguradoras" target="_blank" rel="noopener noreferrer">
+                  <Link to="/seguradoras">
                     <Shield className="mr-2 h-4 w-4 text-primary" /> Seguradoras Parceiras
                   </Link>
                 </DropdownMenuItem>
