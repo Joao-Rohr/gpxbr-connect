@@ -103,6 +103,7 @@ export function QuoteModal({ open, onOpenChange, initialCategory = null }: Quote
   const [category, setCategory] = useState<InsuranceCategory | null>(initialCategory);
   const [data, setData] = useState<Record<string, string>>({});
   const [errors, setErrors] = useState<Record<string, boolean>>({});
+  const [corretor, setCorretor] = useState<string>("");
 
   useEffect(() => {
     if (open) {
@@ -110,6 +111,7 @@ export function QuoteModal({ open, onOpenChange, initialCategory = null }: Quote
       setStep(initialCategory ? 2 : 1);
       setData({});
       setErrors({});
+      setCorretor("");
     }
   }, [open, initialCategory]);
 
